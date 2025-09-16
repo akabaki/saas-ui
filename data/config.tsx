@@ -8,24 +8,24 @@ import { Logo } from './logo'
 const siteConfig = {
   logo: Logo,
   seo: {
-    title: 'Saas UI',
-    description: 'The React component library for startups',
+    title: 'DataConvert Pro',
+    description: 'Professional data conversion platform for organizations',
   } as NextSeoProps,
   termsUrl: '#',
   privacyUrl: '#',
   header: {
     links: [
       {
-        id: 'features',
-        label: 'Features',
+        label: 'Dashboard',
+        href: '/dashboard',
       },
       {
-        id: 'pricing',
-        label: 'Pricing',
+        label: 'Convert Data',
+        href: '/convert',
       },
       {
-        id: 'faq',
-        label: 'FAQ',
+        label: 'Organizations',
+        href: '/organizations',
       },
       {
         label: 'Login',
@@ -41,8 +41,7 @@ const siteConfig = {
   footer: {
     copyright: (
       <>
-        Built by{' '}
-        <Link href="https://twitter.com/Pagebakers">Eelco Wiersma</Link>
+        © 2024 DataConvert Pro. All rights reserved.
       </>
     ),
     links: [
@@ -51,40 +50,40 @@ const siteConfig = {
         label: 'Contact',
       },
       {
-        href: 'https://twitter.com/saas_js',
+        href: '#',
         label: <FaTwitter size="14" />,
       },
       {
-        href: 'https://github.com/saas-js/saas-ui',
+        href: '#',
         label: <FaGithub size="14" />,
       },
     ],
   },
   signup: {
-    title: 'Start building with Saas UI',
+    title: 'Start converting your data today',
     features: [
       {
         icon: FiCheck,
-        title: 'Accessible',
-        description: 'All components strictly follow WAI-ARIA standards.',
+        title: 'Fast Conversion',
+        description: 'Convert CSV files to JSON or XML format in seconds.',
       },
       {
         icon: FiCheck,
-        title: 'Themable',
+        title: 'Secure Processing',
         description:
-          'Fully customize all components to your brand with theme support and style props.',
+          'Your data is processed securely and never stored permanently.',
       },
       {
         icon: FiCheck,
-        title: 'Composable',
+        title: 'Multiple Formats',
         description:
-          'Compose components to fit your needs and mix them together to create new ones.',
+          'Support for CSV, XLS, XLSX input and JSON, XML output formats.',
       },
       {
         icon: FiCheck,
-        title: 'Productive',
+        title: 'Organization Management',
         description:
-          'Designed to reduce boilerplate and fully typed, build your product at speed.',
+          'Manage multiple client organizations and their conversion needs.',
       },
     ],
   },

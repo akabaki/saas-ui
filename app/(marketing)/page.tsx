@@ -94,30 +94,26 @@ const HeroSection: React.FC = () => {
             px="0"
             title={
               <FallInPlace>
-                Build beautiful
-                <Br /> software faster
+                Convert your legacy data
+                <Br /> with confidence
               </FallInPlace>
             }
             description={
               <FallInPlace delay={0.4} fontWeight="medium">
-                Saas UI is a <Em>React component library</Em>
-                <Br /> that doesn&apos;t get in your way and helps you <Br />{' '}
-                build intuitive SaaS products with speed.
+                DataConvert Pro is a <Em>professional data conversion platform</Em>
+                <Br /> that helps organizations migrate from legacy systems <Br />{' '}
+                by converting CSV files to JSON or XML formats.
               </FallInPlace>
             }
           >
             <FallInPlace delay={0.8}>
-              <HStack pt="4" pb="12" spacing="8">
-                <NextjsLogo height="28px" /> <ChakraLogo height="20px" />
-              </HStack>
-
               <ButtonGroup spacing={4} alignItems="center">
-                <ButtonLink colorScheme="primary" size="lg" href="/signup">
-                  Sign Up
+                <ButtonLink colorScheme="primary" size="lg" href="/dashboard">
+                  Get Started
                 </ButtonLink>
                 <ButtonLink
                   size="lg"
-                  href="https://demo.saas-ui.dev"
+                  href="/convert"
                   variant="outline"
                   rightIcon={
                     <Icon
@@ -132,7 +128,7 @@ const HeroSection: React.FC = () => {
                     />
                   }
                 >
-                  View demo
+                  Try Converter
                 </ButtonLink>
               </ButtonGroup>
             </FallInPlace>
@@ -148,14 +144,19 @@ const HeroSection: React.FC = () => {
           >
             <FallInPlace delay={1}>
               <Box overflow="hidden" height="100%">
-                <Image
-                  src="/static/screenshots/list.png"
-                  width={1200}
+                <Box
+                  bg="gray.100"
+                  _dark={{ bg: 'gray.700' }}
                   height={762}
-                  alt="Screenshot of a ListPage in Saas UI Pro"
-                  quality="75"
-                  priority
+                  borderRadius="lg"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  fontSize="xl"
+                  color="gray.500"
                 />
+                  Data Conversion Interface Preview
+                </Box>
               </Box>
             </FallInPlace>
           </Box>
@@ -170,33 +171,33 @@ const HeroSection: React.FC = () => {
         pt="20"
         features={[
           {
-            title: 'Accessible',
-            icon: FiSmile,
-            description: 'All components strictly follow WAI-ARIA standards.',
+            title: 'Fast Processing',
+            icon: FiTrendingUp,
+            description: 'Convert thousands of records in seconds with our optimized engine.',
             iconPosition: 'left',
             delay: 0.6,
           },
           {
-            title: 'Themable',
-            icon: FiSliders,
+            title: 'Secure & Private',
+            icon: FiLock,
             description:
-              'Fully customize all components to your brand with theme support and style props.',
+              'Your data is processed securely and never stored on our servers.',
             iconPosition: 'left',
             delay: 0.8,
           },
           {
-            title: 'Composable',
-            icon: FiGrid,
+            title: 'Multiple Formats',
+            icon: FiBox,
             description:
-              'Compose components to fit your needs and mix them together to create new ones.',
+              'Support for CSV, XLS, XLSX input and JSON, XML output formats.',
             iconPosition: 'left',
             delay: 1,
           },
           {
-            title: 'Productive',
-            icon: FiThumbsUp,
+            title: 'Organization Ready',
+            icon: FiUsers,
             description:
-              'Designed to reduce boilerplate and fully typed, build your product at speed.',
+              'Built for teams and organizations with multi-client support.',
             iconPosition: 'left',
             delay: 1.1,
           },
@@ -212,90 +213,62 @@ const HighlightsSection = () => {
 
   return (
     <Highlights>
-      <HighlightsItem colSpan={[1, null, 2]} title="Core components">
+      <HighlightsItem colSpan={[1, null, 2]} title="Professional Data Conversion">
         <VStack alignItems="flex-start" spacing="8">
           <Text color="muted" fontSize="xl">
-            Get started for free with <Em>30+ open source components</Em>.
-            Including authentication screens with Clerk, Supabase and Magic.
-            Fully functional forms with React Hook Form. Data tables with React
-            Table.
+            Transform your legacy data with <Em>enterprise-grade conversion tools</Em>.
+            Support for multiple file formats, batch processing, and real-time preview.
+            Perfect for organizations migrating from legacy systems.
           </Text>
 
-          <Flex
-            rounded="full"
-            borderWidth="1px"
-            flexDirection="row"
-            alignItems="center"
-            py="1"
-            ps="8"
-            pe="2"
-            bg="primary.900"
-            _dark={{ bg: 'gray.900' }}
-          >
-            <Box>
-              <Text color="yellow.400" display="inline">
-                yarn add
-              </Text>{' '}
-              <Text color="cyan.300" display="inline">
-                @saas-ui/react
-              </Text>
-            </Box>
-            <IconButton
-              icon={hasCopied ? <FiCheck /> : <FiCopy />}
-              aria-label="Copy install command"
-              onClick={onCopy}
-              variant="ghost"
-              ms="4"
-              isRound
-              color="white"
-            />
-          </Flex>
+          <ButtonLink colorScheme="primary" size="lg" href="/convert">
+            Start Converting Now
+          </ButtonLink>
         </VStack>
       </HighlightsItem>
-      <HighlightsItem title="Solid foundations">
+      <HighlightsItem title="Built for Enterprise">
         <Text color="muted" fontSize="lg">
-          We don&apos;t like to re-invent the wheel, neither should you. We
-          selected the most productive and established tools in the scene and
-          build Saas UI on top of it.
+          Designed with enterprise needs in mind. Secure processing, audit trails,
+          organization management, and scalable architecture to handle your
+          data conversion requirements.
         </Text>
       </HighlightsItem>
       <HighlightsTestimonialItem
-        name="Renata Alink"
-        description="Founder"
+        name="Sarah Johnson"
+        description="IT Director, HealthCare Plus"
         avatar="/static/images/avatar.jpg"
         gradient={['pink.200', 'purple.500']}
       >
-        “Saas UI helped us set up a beautiful modern UI in no time. It saved us
-        hundreds of hours in development time and allowed us to focus on
-        business logic for our specific use-case from the start.”
+        "DataConvert Pro saved us weeks of manual data migration work. The
+        conversion accuracy is excellent and the organization management
+        features make it perfect for our multi-department needs."
       </HighlightsTestimonialItem>
       <HighlightsItem
         colSpan={[1, null, 2]}
-        title="Start your next idea two steps ahead"
+        title="Everything you need for data migration"
       >
         <Text color="muted" fontSize="lg">
-          We took care of all your basic frontend needs, so you can start
-          building functionality that makes your product unique.
+          Complete toolkit for converting legacy data formats. From simple
+          CSV files to complex organizational data structures.
         </Text>
         <Wrap mt="8">
           {[
-            'authentication',
-            'navigation',
-            'crud',
-            'settings',
-            'multi-tenancy',
-            'layouts',
-            'billing',
-            'a11y testing',
-            'server-side rendering',
-            'documentation',
-            'onboarding',
-            'storybooks',
-            'theming',
-            'upselling',
-            'unit testing',
-            'feature flags',
-            'responsiveness',
+            'CSV to JSON',
+            'CSV to XML',
+            'Excel support',
+            'batch processing',
+            'data preview',
+            'organization management',
+            'audit trails',
+            'secure processing',
+            'real-time conversion',
+            'download management',
+            'error handling',
+            'data validation',
+            'custom formatting',
+            'API integration',
+            'team collaboration',
+            'progress tracking',
           ].map((value) => (
             <Tag
               key={value}
@@ -324,16 +297,15 @@ const FeaturesSection = () => {
           textAlign="left"
           as="p"
         >
-          Not your standard
-          <Br /> dashboard template.
+          More than just
+          <Br /> file conversion.
         </Heading>
       }
       description={
         <>
-          Saas UI Pro includes everything you need to build modern frontends.
+          DataConvert Pro includes everything you need for enterprise data migration.
           <Br />
-          Use it as a template for your next product or foundation for your
-          design system.
+          From simple file conversion to complex organizational data management.
         </>
       }
       align="left"
@@ -341,69 +313,68 @@ const FeaturesSection = () => {
       iconSize={4}
       features={[
         {
-          title: '#components.',
-          icon: FiBox,
+          title: 'Batch Processing',
+          icon: FiGrid,
           description:
-            'All premium components are available on a private NPM registery, no more copy pasting and always up-to-date.',
+            'Process multiple files simultaneously with our advanced batch conversion engine.',
           variant: 'inline',
         },
         {
-          title: 'Starterkits.',
+          title: 'Data Security',
           icon: FiLock,
           description:
-            'Example apps in Next.JS, Electron. Including authentication, billing, example pages, everything you need to get started FAST.',
+            'Enterprise-grade security with encrypted processing and no data retention policies.',
           variant: 'inline',
         },
         {
-          title: 'Documentation.',
-          icon: FiSearch,
+          title: 'Real-time Preview',
+          icon: FiEye,
           description:
-            'Extensively documented, including storybooks, best practices, use-cases and examples.',
+            'Preview your data before conversion to ensure accuracy and proper formatting.',
           variant: 'inline',
         },
         {
-          title: 'Onboarding.',
+          title: 'Team Management',
           icon: FiUserPlus,
           description:
-            'Add user onboarding flows, like tours, hints and inline documentation without breaking a sweat.',
+            'Manage multiple organizations and team members with role-based access control.',
           variant: 'inline',
         },
         {
-          title: 'Feature flags.',
+          title: 'Audit Trails',
           icon: FiFlag,
           description:
-            "Implement feature toggles for your billing plans with easy to use hooks. Connect Flagsmith, or other remote config services once you're ready.",
+            'Complete audit logging for compliance and tracking of all conversion activities.',
           variant: 'inline',
         },
         {
-          title: 'Upselling.',
+          title: 'API Integration',
           icon: FiTrendingUp,
           description:
-            '#components and hooks for upgrade flows designed to make upgrading inside your app frictionless.',
+            'RESTful API for integrating data conversion into your existing workflows.',
           variant: 'inline',
         },
         {
-          title: 'Themes.',
-          icon: FiToggleLeft,
+          title: 'Custom Formats',
+          icon: FiSliders,
           description:
-            'Includes multiple themes with darkmode support, always have the perfect starting point for your next project.',
+            'Support for custom data formats and transformation rules for specific use cases.',
           variant: 'inline',
         },
         {
-          title: 'Generators.',
+          title: 'Progress Tracking',
           icon: FiTerminal,
           description:
-            'Extend your design system while maintaininig code quality and consistency with built-in generators.',
+            'Real-time progress tracking for large file conversions with detailed status updates.',
           variant: 'inline',
         },
         {
-          title: 'Monorepo.',
+          title: 'Error Handling',
           icon: FiCode,
           description: (
             <>
-              All code is available as packages in a high-performance{' '}
-              <Link href="https://turborepo.com">Turborepo</Link>, you have full
-              control to modify and adjust it to your workflow.
+              Comprehensive error handling with detailed reports and suggestions
+              for data format issues and conversion problems.
             </>
           ),
           variant: 'inline',
