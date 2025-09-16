@@ -1,3 +1,5 @@
+import 'use client'
+
 import { ChakraProps, chakra } from '@chakra-ui/react'
 import { HTMLMotionProps, motion } from 'framer-motion'
 
