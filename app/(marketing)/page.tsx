@@ -42,7 +42,6 @@ import {
   HighlightsItem,
   HighlightsTestimonialItem,
 } from '#components/highlights'
-import { FallInPlace } from '#components/motion/fall-in-place'
 import { Pricing } from '#components/pricing/pricing'
 import { Testimonial, Testimonials } from '#components/testimonials'
 import { Em, Br } from '#components/typography'
@@ -74,20 +73,20 @@ const HeroSection = () => {
             justifyContent="flex-start"
             px="0"
             title={
-              <FallInPlace>
+              <Box>
                 Convert your legacy data
                 <Br /> with confidence
-              </FallInPlace>
+              </Box>
             }
             description={
-              <FallInPlace delay={0.4} fontWeight="medium">
+              <Box fontWeight="medium">
                 DataConvert Pro is a <Em>professional data conversion platform</Em>
                 <Br /> that helps organizations migrate from legacy systems <Br />{' '}
                 by converting CSV files to JSON or XML formats.
-              </FallInPlace>
+              </Box>
             }
           >
-            <FallInPlace delay={0.8}>
+            <Box>
               <ButtonGroup spacing={4} alignItems="center">
                 <ButtonLink colorScheme="primary" size="lg" href="/dashboard">
                   Get Started
@@ -96,23 +95,12 @@ const HeroSection = () => {
                   size="lg"
                   href="/convert"
                   variant="outline"
-                  rightIcon={
-                    <Icon
-                      as={FiArrowRight}
-                      sx={{
-                        transitionProperty: 'common',
-                        transitionDuration: 'normal',
-                        '.chakra-button:hover &': {
-                          transform: 'translate(5px)',
-                        },
-                      }}
-                    />
-                  }
+                  rightIcon={<Icon as={FiArrowRight} />}
                 >
                   Try Converter
                 </ButtonLink>
               </ButtonGroup>
-            </FallInPlace>
+            </Box>
           </Hero>
           <Box
             height="600px"
@@ -123,7 +111,7 @@ const HeroSection = () => {
             maxW="1100px"
             margin="0 auto"
           >
-            <FallInPlace delay={1}>
+            <Box>
               <Box overflow="hidden" height="100%">
                 <Box
                   bg="gray.100"
@@ -139,7 +127,7 @@ const HeroSection = () => {
                   Data Conversion Interface Preview
                 </Box>
               </Box>
-            </FallInPlace>
+            </Box>
           </Box>
         </Stack>
       </Container>
@@ -156,7 +144,6 @@ const HeroSection = () => {
             icon: FiTrendingUp,
             description: 'Convert thousands of records in seconds with our optimized engine.',
             iconPosition: 'left',
-            delay: 0.6,
           },
           {
             title: 'Secure & Private',
@@ -164,7 +151,6 @@ const HeroSection = () => {
             description:
               'Your data is processed securely and never stored on our servers.',
             iconPosition: 'left',
-            delay: 0.8,
           },
           {
             title: 'Multiple Formats',
@@ -172,7 +158,6 @@ const HeroSection = () => {
             description:
               'Support for CSV, XLS, XLSX input and JSON, XML output formats.',
             iconPosition: 'left',
-            delay: 1,
           },
           {
             title: 'Organization Ready',
@@ -180,10 +165,8 @@ const HeroSection = () => {
             description:
               'Built for teams and organizations with multi-client support.',
             iconPosition: 'left',
-            delay: 1.1,
           },
         ]}
-        reveal={FallInPlace}
       />
     </Box>
   )
