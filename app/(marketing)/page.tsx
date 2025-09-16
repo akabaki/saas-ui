@@ -1,5 +1,3 @@
-'use client'
-
 import {
   Box,
   ButtonGroup,
@@ -8,35 +6,26 @@ import {
   HStack,
   Heading,
   Icon,
-  IconButton,
   Stack,
   Tag,
   Text,
   VStack,
   Wrap,
-  useClipboard,
 } from '@chakra-ui/react'
 import { Link } from '@saas-ui/react'
-import type { Metadata, NextPage } from 'next'
 import {
   FiArrowRight,
   FiBox,
-  FiCheck,
   FiCode,
-  FiCopy,
+  FiEye,
   FiFlag,
   FiGrid,
   FiLock,
-  FiSearch,
   FiSliders,
-  FiSmile,
   FiTerminal,
-  FiThumbsUp,
-  FiToggleLeft,
   FiTrendingUp,
   FiUserPlus,
   FiUsers,
-  FiEye,
 } from 'react-icons/fi'
 
 import * as React from 'react'
@@ -51,7 +40,6 @@ import {
   HighlightsItem,
   HighlightsTestimonialItem,
 } from '#components/highlights'
-import { ChakraLogo, NextjsLogo } from '#components/logos'
 import { FallInPlace } from '#components/motion/fall-in-place'
 import { Pricing } from '#components/pricing/pricing'
 import { Testimonial, Testimonials } from '#components/testimonials'
@@ -60,12 +48,7 @@ import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
 
-export const meta: Metadata = {
-  title: 'DataConvert Pro - Professional Data Conversion',
-  description: 'Convert legacy CSV data to JSON and XML formats',
-}
-
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <Box>
       <HeroSection />
@@ -78,7 +61,7 @@ const Home: NextPage = () => {
   )
 }
 
-const HeroSection: React.FC = () => {
+const HeroSection = () => {
   return (
     <Box position="relative" overflow="hidden">
       <BackgroundGradient height="100%" zIndex="-1" />
@@ -205,8 +188,6 @@ const HeroSection: React.FC = () => {
 }
 
 const HighlightsSection = () => {
-  const { value, onCopy, hasCopied } = useClipboard('yarn add @saas-ui/react')
-
   return (
     <Highlights>
       <HighlightsItem colSpan={[1, null, 2]} title="Professional Data Conversion">
