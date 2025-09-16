@@ -160,7 +160,6 @@ const HeroSection: React.FC = () => {
                 </Box>
               </Box>
             </FallInPlace>
-          </Box>
         </Stack>
       </Container>
 
