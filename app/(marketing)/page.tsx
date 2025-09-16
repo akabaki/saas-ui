@@ -16,9 +16,8 @@ import {
   Wrap,
   useClipboard,
 } from '@chakra-ui/react'
-import { Br, Link } from '@saas-ui/react'
+import { Link } from '@saas-ui/react'
 import type { Metadata, NextPage } from 'next'
-import Image from 'next/image'
 import {
   FiArrowRight,
   FiBox,
@@ -36,6 +35,8 @@ import {
   FiToggleLeft,
   FiTrendingUp,
   FiUserPlus,
+  FiUsers,
+  FiEye,
 } from 'react-icons/fi'
 
 import * as React from 'react'
@@ -54,29 +55,24 @@ import { ChakraLogo, NextjsLogo } from '#components/logos'
 import { FallInPlace } from '#components/motion/fall-in-place'
 import { Pricing } from '#components/pricing/pricing'
 import { Testimonial, Testimonials } from '#components/testimonials'
-import { Em } from '#components/typography'
+import { Em, Br } from '#components/typography'
 import faq from '#data/faq'
 import pricing from '#data/pricing'
 import testimonials from '#data/testimonials'
 
 export const meta: Metadata = {
-  title: 'Saas UI Landingspage',
-  description: 'Free SaaS landingspage starter kit',
+  title: 'DataConvert Pro - Professional Data Conversion',
+  description: 'Convert legacy CSV data to JSON and XML formats',
 }
 
 const Home: NextPage = () => {
   return (
     <Box>
       <HeroSection />
-
       <HighlightsSection />
-
       <FeaturesSection />
-
       <TestimonialsSection />
-
       <PricingSection />
-
       <FaqSection />
     </Box>
   )
@@ -157,9 +153,9 @@ const HeroSection: React.FC = () => {
                 >
                   Data Conversion Interface Preview
                 </Box>
-                </Box>
               </Box>
             </FallInPlace>
+          </Box>
         </Stack>
       </Container>
 
