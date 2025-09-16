@@ -1,4 +1,4 @@
-import 'use client'
+'use client'
 
 import * as React from 'react'
 import { HTMLMotionProps } from 'framer-motion'
