@@ -16,23 +16,31 @@ const siteConfig = {
   header: {
     links: [
       {
-        label: 'Dashboard',
-        href: '/dashboard',
+        label: 'Products',
+        href: '#',
       },
       {
-        label: 'Convert Data',
-        href: '/convert',
+        label: 'Features',
+        href: '#',
       },
       {
-        label: 'Organizations',
-        href: '/organizations',
+        label: 'Resources',
+        href: '#',
+      },
+      {
+        label: 'Compare',
+        href: '#',
+      },
+      {
+        label: 'Pricing',
+        href: '#',
       },
       {
         label: 'Login',
         href: '/login',
       },
       {
-        label: 'Sign Up',
+        label: 'Get Started',
         href: '/signup',
         variant: 'primary',
       },

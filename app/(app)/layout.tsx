@@ -21,6 +21,9 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
+  Button,
+  Badge,
+  Divider,
 } from '@chakra-ui/react'
 import { Link } from '@saas-ui/react'
 import { usePathname } from 'next/navigation'
@@ -33,18 +36,20 @@ import {
   FiMenu,
   FiLogOut,
   FiUser,
+  FiShoppingCart,
+  FiGrid,
 } from 'react-icons/fi'
 import { Logo } from '#components/layout/logo'
-import ThemeToggle from '#components/layout/theme-toggle'
 
 interface NavItemProps {
   icon: any
   children: ReactNode
   href: string
   isActive?: boolean
+  badge?: string
 }
 
-const NavItem = ({ icon, children, href, isActive, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, href, isActive, badge, ...rest }: NavItemProps) => {
   return (
     <Link
       href={href}
@@ -53,31 +58,40 @@ const NavItem = ({ icon, children, href, isActive, ...rest }: NavItemProps) => {
     >
       <Flex
         align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
+        p="3"
+        mx="2"
+        borderRadius="md"
         role="group"
         cursor="pointer"
-        bg={isActive ? 'blue.400' : 'transparent'}
-        color={isActive ? 'white' : 'inherit'}
+        bg={isActive ? 'orange.50' : 'transparent'}
+        color={isActive ? 'orange.600' : 'gray.600'}
+        borderLeft={isActive ? '3px solid' : '3px solid transparent'}
+        borderLeftColor={isActive ? 'orange.500' : 'transparent'}
         _hover={{
-          bg: isActive ? 'blue.400' : 'gray.100',
-          _dark: { bg: isActive ? 'blue.400' : 'gray.700' },
+          bg: 'orange.50',
+          color: 'orange.600',
         }}
+        fontSize="sm"
+        fontWeight="medium"
         {...rest}
       >
         {icon && (
           <Box
-            mr="4"
-            fontSize="16"
+            mr="3"
+            fontSize="18"
             _groupHover={{
-              color: isActive ? 'white' : 'blue.400',
+              color: 'orange.500',
             }}
           >
             {icon}
           </Box>
         )}
-        {children}
+        <Text flex="1">{children}</Text>
+        {badge && (
+          <Badge colorScheme="orange" size="sm" borderRadius="full">
+            {badge}
+          </Badge>
+        )}
       </Flex>
     </Link>
   )
@@ -88,104 +102,129 @@ const SidebarContent = ({ onClose, ...rest }: any) => {
 
   const linkItems = [
     { name: 'Dashboard', icon: FiHome, href: '/dashboard' },
-    { name: 'Convert Data', icon: FiRefreshCw, href: '/convert' },
+    { name: 'Data Converter', icon: FiRefreshCw, href: '/convert', badge: 'New' },
     { name: 'Organizations', icon: FiUsers, href: '/organizations' },
     { name: 'Settings', icon: FiSettings, href: '/settings' },
   ]
 
   return (
     <Box
-      bg={useColorModeValue('white', 'gray.900')}
+      bg="white"
       borderRight="1px"
-      borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-      w={{ base: 'full', md: 60 }}
+      borderRightColor="gray.200"
+      w={{ base: 'full', md: 64 }}
       pos="fixed"
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Logo />
+      <Flex h="16" alignItems="center" mx="4" justifyContent="space-between">
+        <Text fontSize="xl" fontWeight="bold" color="orange.500">
+          DataConvert
+        </Text>
         <Box display={{ base: 'flex', md: 'none' }}>
           <IconButton
             onClick={onClose}
-            variant="outline"
+            variant="ghost"
             aria-label="close menu"
             icon={<FiMenu />}
           />
         </Box>
       </Flex>
-      {linkItems.map((link) => (
-        <NavItem
-          key={link.name}
-          icon={<link.icon />}
-          href={link.href}
-          isActive={pathname === link.href}
-        >
-          {link.name}
+      
+      <Box px="2" mt="4">
+        <Text fontSize="xs" fontWeight="semibold" color="gray.400" px="3" mb="2" textTransform="uppercase">
+          Main Menu
+        </Text>
+        {linkItems.map((link) => (
+          <NavItem
+            key={link.name}
+            icon={<link.icon />}
+            href={link.href}
+            isActive={pathname === link.href}
+            badge={link.badge}
+          >
+            {link.name}
+          </NavItem>
+        ))}
+      </Box>
+
+      <Divider my="4" />
+
+      <Box px="2">
+        <Text fontSize="xs" fontWeight="semibold" color="gray.400" px="3" mb="2" textTransform="uppercase">
+          Quick Actions
+        </Text>
+        <NavItem icon={<FiGrid />} href="/convert">
+          Convert Files
         </NavItem>
-      ))}
+      </Box>
     </Box>
   )
 }
 
-const MobileNav = ({ onOpen, ...rest }: any) => {
+const TopNav = ({ onOpen, ...rest }: any) => {
   return (
     <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 4 }}
-      height="20"
+      ml={{ base: 0, md: 64 }}
+      px={{ base: 4, md: 6 }}
+      height="16"
       alignItems="center"
-      bg={useColorModeValue('white', 'gray.900')}
+      bg="white"
       borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
+      borderBottomColor="gray.200"
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}
     >
       <IconButton
         display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
-        variant="outline"
+        variant="ghost"
         aria-label="open menu"
         icon={<FiMenu />}
       />
 
       <Text
         display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
+        fontSize="xl"
         fontWeight="bold"
+        color="orange.500"
       >
         DataConvert
       </Text>
 
-      <HStack spacing={{ base: '0', md: '6' }}>
-        <ThemeToggle />
-        <Flex alignItems="center">
-          <Menu>
-            <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
-              <HStack>
-                <Avatar size="sm" name="Admin User" />
-                <VStack
-                  display={{ base: 'none', md: 'flex' }}
-                  alignItems="flex-start"
-                  spacing="1px"
-                  ml="2"
-                >
-                  <Text fontSize="sm">Admin User</Text>
-                  <Text fontSize="xs" color="gray.600">
-                    Administrator
-                  </Text>
-                </VStack>
-              </HStack>
-            </MenuButton>
-            <MenuList>
-              <MenuItem icon={<FiUser />}>Profile</MenuItem>
-              <MenuItem icon={<FiSettings />}>Settings</MenuItem>
-              <MenuDivider />
-              <MenuItem icon={<FiLogOut />}>Sign out</MenuItem>
-            </MenuList>
-          </Menu>
-        </Flex>
+      <HStack spacing="4">
+        <Button
+          colorScheme="orange"
+          size="sm"
+          leftIcon={<FiShoppingCart />}
+        >
+          Upgrade
+        </Button>
+        
+        <Menu>
+          <MenuButton>
+            <HStack>
+              <Avatar size="sm" name="Admin User" bg="orange.500" />
+              <VStack
+                display={{ base: 'none', md: 'flex' }}
+                alignItems="flex-start"
+                spacing="1px"
+                ml="2"
+              >
+                <Text fontSize="sm" fontWeight="medium">Admin User</Text>
+                <Text fontSize="xs" color="gray.500">
+                  Administrator
+                </Text>
+              </VStack>
+            </HStack>
+          </MenuButton>
+          <MenuList>
+            <MenuItem icon={<FiUser />}>Profile</MenuItem>
+            <MenuItem icon={<FiSettings />}>Settings</MenuItem>
+            <MenuDivider />
+            <MenuItem icon={<FiLogOut />}>Sign out</MenuItem>
+          </MenuList>
+        </Menu>
       </HStack>
     </Flex>
   )
@@ -195,7 +234,7 @@ export default function AppLayout({ children }: { children: ReactNode }) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
-    <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
+    <Box minH="100vh" bg="gray.50">
       <SidebarContent onClose={onClose} display={{ base: 'none', md: 'block' }} />
       <Drawer
         autoFocus={false}
@@ -211,8 +250,8 @@ export default function AppLayout({ children }: { children: ReactNode }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <TopNav onOpen={onOpen} />
+      <Box ml={{ base: 0, md: 64 }} p="6" bg="gray.50" minH="calc(100vh - 64px)">
         {children}
       </Box>
     </Box>

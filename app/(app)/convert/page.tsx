@@ -27,10 +27,12 @@ import {
   Flex,
   IconButton,
   Tooltip,
+  SimpleGrid,
+  Icon,
 } from '@chakra-ui/react'
 import { useState, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { FiUpload, FiDownload, FiEye, FiTrash2, FiRefreshCw } from 'react-icons/fi'
+import { FiUpload, FiDownload, FiEye, FiTrash2, FiRefreshCw, FiFile, FiCheckCircle, FiClock } from 'react-icons/fi'
 import { PageTransition } from '#components/motion/page-transition'
 
 interface ConversionJob {
@@ -164,52 +166,102 @@ const Convert = () => {
   const getStatusColor = (status: ConversionJob['status']) => {
     switch (status) {
       case 'completed': return 'green'
-      case 'processing': return 'blue'
+      case 'processing': return 'orange'
       case 'error': return 'red'
       default: return 'gray'
     }
   }
 
+  const getStatusIcon = (status: ConversionJob['status']) => {
+    switch (status) {
+      case 'completed': return FiCheckCircle
+      case 'processing': return FiClock
+      case 'error': return FiTrash2
+      default: return FiFile
+    }
+  }
+
   return (
-    <Container maxW="container.xl" py="8">
+    <Box>
       <PageTransition>
         <VStack spacing="8" align="stretch">
+          {/* Header */}
           <Box>
-            <Heading size="lg" mb="2">
+            <Heading size="lg" mb="2" color="gray.800">
               Data Conversion Tool
             </Heading>
-            <Text color="muted">
-              Upload your CSV files and convert them to JSON or XML format
+            <Text color="gray.600">
+              Upload your CSV files and convert them to JSON or XML format with ease
             </Text>
           </Box>
 
-          <Card>
+          {/* Quick Stats */}
+          <SimpleGrid columns={[2, 4]} spacing="4">
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200" size="sm">
+              <CardBody textAlign="center" py="4">
+                <Icon as={FiFile} boxSize="6" color="orange.500" mb="2" />
+                <Text fontSize="lg" fontWeight="bold" color="gray.800">{files.length}</Text>
+                <Text fontSize="sm" color="gray.600">Files Ready</Text>
+              </CardBody>
+            </Card>
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200" size="sm">
+              <CardBody textAlign="center" py="4">
+                <Icon as={FiRefreshCw} boxSize="6" color="orange.500" mb="2" />
+                <Text fontSize="lg" fontWeight="bold" color="gray.800">{conversionJobs.length}</Text>
+                <Text fontSize="sm" color="gray.600">Total Jobs</Text>
+              </CardBody>
+            </Card>
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200" size="sm">
+              <CardBody textAlign="center" py="4">
+                <Icon as={FiCheckCircle} boxSize="6" color="green.500" mb="2" />
+                <Text fontSize="lg" fontWeight="bold" color="gray.800">
+                  {conversionJobs.filter(j => j.status === 'completed').length}
+                </Text>
+                <Text fontSize="sm" color="gray.600">Completed</Text>
+              </CardBody>
+            </Card>
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200" size="sm">
+              <CardBody textAlign="center" py="4">
+                <Icon as={FiClock} boxSize="6" color="orange.500" mb="2" />
+                <Text fontSize="lg" fontWeight="bold" color="gray.800">
+                  {conversionJobs.filter(j => j.status === 'processing').length}
+                </Text>
+                <Text fontSize="sm" color="gray.600">Processing</Text>
+              </CardBody>
+            </Card>
+          </SimpleGrid>
+
+          {/* Upload Section */}
+          <Card bg="white" shadow="sm" border="1px" borderColor="gray.200">
             <CardHeader>
-              <Heading size="md">Upload Files</Heading>
+              <Heading size="md" color="gray.800">Upload Files</Heading>
+              <Text fontSize="sm" color="gray.600">
+                Drag and drop your CSV, XLS, or XLSX files here
+              </Text>
             </CardHeader>
             <CardBody>
               <VStack spacing="6">
                 <Box
                   {...getRootProps()}
                   border="2px dashed"
-                  borderColor={isDragActive ? 'blue.300' : 'gray.300'}
+                  borderColor={isDragActive ? 'orange.300' : 'gray.300'}
                   borderRadius="lg"
-                  p="8"
+                  p="12"
                   textAlign="center"
                   cursor="pointer"
                   transition="all 0.2s"
-                  _hover={{ borderColor: 'blue.400', bg: 'blue.50' }}
-                  _dark={{ _hover: { bg: 'blue.900' } }}
+                  _hover={{ borderColor: 'orange.400', bg: 'orange.50' }}
                   w="full"
+                  bg={isDragActive ? 'orange.50' : 'gray.50'}
                 >
                   <input {...getInputProps()} />
                   <VStack spacing="4">
-                    <FiUpload size="48" />
+                    <Icon as={FiUpload} boxSize="12" color="orange.500" />
                     <Box>
-                      <Text fontSize="lg" fontWeight="medium">
+                      <Text fontSize="lg" fontWeight="medium" color="gray.800">
                         {isDragActive ? 'Drop files here' : 'Drag & drop files here'}
                       </Text>
-                      <Text color="muted">
+                      <Text color="gray.600">
                         or click to browse (CSV, XLS, XLSX files)
                       </Text>
                     </Box>
@@ -218,7 +270,7 @@ const Convert = () => {
 
                 {files.length > 0 && (
                   <Box w="full">
-                    <Text fontWeight="medium" mb="3">
+                    <Text fontWeight="medium" mb="3" color="gray.800">
                       Selected Files ({files.length})
                     </Text>
                     <VStack spacing="2" align="stretch">
@@ -229,12 +281,16 @@ const Convert = () => {
                           align="center"
                           p="3"
                           bg="gray.50"
-                          _dark={{ bg: 'gray.700' }}
                           borderRadius="md"
+                          border="1px"
+                          borderColor="gray.200"
                         >
-                          <Text>{file.name}</Text>
                           <HStack>
-                            <Text fontSize="sm" color="muted">
+                            <Icon as={FiFile} color="orange.500" />
+                            <Text color="gray.800">{file.name}</Text>
+                          </HStack>
+                          <HStack>
+                            <Text fontSize="sm" color="gray.600">
                               {(file.size / 1024).toFixed(1)} KB
                             </Text>
                             <IconButton
@@ -254,10 +310,12 @@ const Convert = () => {
 
                 <HStack spacing="4" w="full">
                   <FormControl maxW="200px">
-                    <FormLabel>Output Format</FormLabel>
+                    <FormLabel color="gray.700">Output Format</FormLabel>
                     <Select
                       value={outputFormat}
                       onChange={(e) => setOutputFormat(e.target.value)}
+                      bg="white"
+                      borderColor="gray.300"
                     >
                       <option value="json">JSON</option>
                       <option value="xml">XML</option>
@@ -267,12 +325,13 @@ const Convert = () => {
                   <Box flex="1" />
 
                   <Button
-                    colorScheme="blue"
+                    colorScheme="orange"
                     leftIcon={<FiRefreshCw />}
                     onClick={handleConvert}
                     isLoading={isProcessing}
                     loadingText="Converting..."
                     isDisabled={files.length === 0}
+                    size="lg"
                   >
                     Convert Files
                   </Button>
@@ -281,21 +340,24 @@ const Convert = () => {
             </CardBody>
           </Card>
 
+          {/* Preview Section */}
           {previewData.length > 0 && (
-            <Card>
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200">
               <CardHeader>
-                <Heading size="md">Data Preview</Heading>
-                <Text color="muted" fontSize="sm">
+                <Heading size="md" color="gray.800">Data Preview</Heading>
+                <Text color="gray.600" fontSize="sm">
                   Showing first 5 rows of {files[0]?.name}
                 </Text>
               </CardHeader>
               <CardBody>
-                <TableContainer>
-                  <Table size="sm">
-                    <Thead>
+                <Box overflowX="auto">
+                  <Table size="sm" variant="simple">
+                    <Thead bg="gray.50">
                       <Tr>
                         {Object.keys(previewData[0] || {}).map((header) => (
-                          <Th key={header}>{header}</Th>
+                          <Th key={header} color="gray.700" fontWeight="semibold">
+                            {header}
+                          </Th>
                         ))}
                       </Tr>
                     </Thead>
@@ -303,49 +365,62 @@ const Convert = () => {
                       {previewData.map((row, index) => (
                         <Tr key={index}>
                           {Object.values(row).map((value: any, cellIndex) => (
-                            <Td key={cellIndex}>{value}</Td>
+                            <Td key={cellIndex} color="gray.800">
+                              {value}
+                            </Td>
                           ))}
                         </Tr>
                       ))}
                     </Tbody>
                   </Table>
-                </TableContainer>
+                </Box>
               </CardBody>
             </Card>
           )}
 
+          {/* Conversion History */}
           {conversionJobs.length > 0 && (
-            <Card>
+            <Card bg="white" shadow="sm" border="1px" borderColor="gray.200">
               <CardHeader>
-                <Heading size="md">Conversion History</Heading>
+                <Heading size="md" color="gray.800">Conversion History</Heading>
+                <Text fontSize="sm" color="gray.600">
+                  Track your recent conversion jobs and download results
+                </Text>
               </CardHeader>
               <CardBody>
                 <TableContainer>
                   <Table>
-                    <Thead>
+                    <Thead bg="gray.50">
                       <Tr>
-                        <Th>File Name</Th>
-                        <Th>Input Format</Th>
-                        <Th>Output Format</Th>
-                        <Th>Records</Th>
-                        <Th>Status</Th>
-                        <Th>Created</Th>
-                        <Th>Actions</Th>
+                        <Th color="gray.700">File Name</Th>
+                        <Th color="gray.700">Input Format</Th>
+                        <Th color="gray.700">Output Format</Th>
+                        <Th color="gray.700">Records</Th>
+                        <Th color="gray.700">Status</Th>
+                        <Th color="gray.700">Created</Th>
+                        <Th color="gray.700">Actions</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
                       {conversionJobs.map((job) => (
                         <Tr key={job.id}>
-                          <Td>{job.fileName}</Td>
-                          <Td>{job.inputFormat}</Td>
-                          <Td>{job.outputFormat}</Td>
-                          <Td>{job.recordCount.toLocaleString()}</Td>
+                          <Td color="gray.800" fontWeight="medium">{job.fileName}</Td>
+                          <Td color="gray.600">{job.inputFormat}</Td>
+                          <Td color="gray.600">{job.outputFormat}</Td>
+                          <Td color="gray.600">{job.recordCount.toLocaleString()}</Td>
                           <Td>
-                            <Badge colorScheme={getStatusColor(job.status)}>
+                            <Badge 
+                              colorScheme={getStatusColor(job.status)}
+                              variant="subtle"
+                              display="flex"
+                              alignItems="center"
+                              w="fit-content"
+                            >
+                              <Icon as={getStatusIcon(job.status)} mr="1" />
                               {job.status}
                             </Badge>
                           </Td>
-                          <Td>{job.createdAt.toLocaleDateString()}</Td>
+                          <Td color="gray.600">{job.createdAt.toLocaleDateString()}</Td>
                           <Td>
                             <HStack spacing="2">
                               <Tooltip label="Preview">
@@ -362,7 +437,7 @@ const Convert = () => {
                                   icon={<FiDownload />}
                                   size="sm"
                                   variant="ghost"
-                                  colorScheme="blue"
+                                  colorScheme="orange"
                                   onClick={() => handleDownload(job)}
                                   isDisabled={job.status !== 'completed'}
                                 />
@@ -379,7 +454,7 @@ const Convert = () => {
           )}
         </VStack>
       </PageTransition>
-    </Container>
+    </Box>
   )
 }
 
