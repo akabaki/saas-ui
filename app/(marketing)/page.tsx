@@ -154,8 +154,9 @@ const HeroSection: React.FC = () => {
                   justifyContent="center"
                   fontSize="xl"
                   color="gray.500"
-                />
+                >
                   Data Conversion Interface Preview
+                </Box>
                 </Box>
               </Box>
             </FallInPlace>
